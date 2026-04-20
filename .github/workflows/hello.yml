@@ -1,16 +1,63 @@
-name: Push Workflow in github
+# name: Push Workflow in github
 
-on: push
+# on: push
+
+# jobs:
+#   hello-world:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Print Hello World
+#         run: echo "Hello World, github actions "
+
+#   say-goodbye:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Print message 
+#         run: echo "Goodbye third year  "
+
+
+# name: User action 
+# on :push
+# jobs:
+# test:
+# runs-on:ubuntu-latest
+#  steps:
+#  -name:Checkout code // clone a repo 
+#  uses:actions/checkout@v4
+
+
+#  -name: List file
+#  run: ls 
+
+#  steps:
+#  -name: checkout code 
+#  users: actions/setup-node@v4
+#  with: 
+#  node-version: 18
+#  -name: Check Node ver
+
+name: Uses action
+
+on:
+  push:
+  pull_request:
 
 jobs:
-  hello-world:
+  test:
     runs-on: ubuntu-latest
-    steps:
-      - name: Print Hello World
-        run: echo "Hello World, github actions "
 
-  say-goodbye:
-    runs-on: ubuntu-latest
     steps:
-      - name: Print message 
-        run: echo "Goodbye third year  "
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 18
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Check Node version
+        run: node -v
+
+      - name: List files
+        run: ls
+
