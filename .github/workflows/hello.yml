@@ -1,0 +1,16 @@
+name: Push Workflow in github
+
+on: push
+
+jobs:
+  hello-world:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print Hello World
+        run: echo "Hello World, github actions "
+
+  say-goodbye:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print message 
+        run: echo "Goodbye third year  "
