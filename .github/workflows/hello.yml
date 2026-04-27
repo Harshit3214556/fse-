@@ -36,28 +36,36 @@
 #  node-version: 18
 #  -name: Check Node ver
 
-name: Uses action
+name: PR Workflow
 
 on:
   push:
   pull_request:
 
 jobs:
-  test:
+  job1:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - name: Create a file
+        run: echo "Hello World" > file.txt
 
-      - name: Setup Node.js 18
-        uses: actions/setup-node@v4
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
         with:
-          node-version: 18
+          name: my-file
+          path: file.txt
 
-      - name: Check Node version
-        run: node -v
+  job2:
+    needs: job1
+    runs-on: ubuntu-latest
 
-      - name: List files
-        run: ls
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: my-file
+
+      - name: Read file
+        run: cat file.txt
 
